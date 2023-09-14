@@ -229,6 +229,15 @@ struct evp_kem_st {
     OSSL_FUNC_kem_auth_decapsulate_init_fn *auth_decapsulate_init;
 } /* EVP_KEM */;
 
+struct evp_streamenc_ctx_st {
+    const EVP_CIPHER *cipher;
+    unsigned char k[EVP_MAX_KEY_LENGTH];
+    unsigned char iv[EVP_MAX_IV_LENGTH];
+    int key_len;
+    int iv_len;
+    unsigned long i;   /* message counter */
+} /* EVP_STREAMENC_CTX */;
+
 int PKCS5_v2_PBKDF2_keyivgen(EVP_CIPHER_CTX *ctx, const char *pass,
                              int passlen, ASN1_TYPE *param,
                              const EVP_CIPHER *c, const EVP_MD *md,
